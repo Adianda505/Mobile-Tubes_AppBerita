@@ -1,6 +1,7 @@
 import 'package:field_area_proj_mobile/intro_app/intro1.dart';
 import 'package:field_area_proj_mobile/intro_app/intro2.dart';
 import 'package:field_area_proj_mobile/intro_app/intro3.dart';
+import 'package:field_area_proj_mobile/login/regist/login.dart';
 import 'package:field_area_proj_mobile/login/regist/regist.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -42,7 +43,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               introPage1(),
               introPage2(),
               introPage3(),
-              Regist(), // Index 3: Halaman yang ingin tampil independen
+              Login(),// Index 3: Halaman yang ingin tampil independen
             ],
           ),
 
