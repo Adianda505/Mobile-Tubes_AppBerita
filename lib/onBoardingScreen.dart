@@ -14,8 +14,8 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
-  
   final PageController _controller = PageController();
+  
   
   // Logika halaman terakhir (index 2: introPage3)
   bool isLastIntroPage = false; 
@@ -52,7 +52,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           if (currentPage <= 2) 
             Positioned(
               bottom: 180.0,
-              // Mengatur posisi agar benar-benar di tengah (menghapus left: -270)
+          
               left: 0, 
               right: 0,
               child: Center(
