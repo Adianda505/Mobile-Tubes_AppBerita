@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-// void main(){
-//   runApp(Login());
-// }
-
 class Login extends StatelessWidget {
   const Login({super.key});
 
@@ -15,7 +11,6 @@ void login(){
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
           body: Container(
             //Background
               width: double.infinity,
@@ -63,7 +58,9 @@ void login(){
                 child: Column(
                   children: [
                   const SizedBox(height: 20),
+
               SizedBox(height: 20),
+
               Align(
                 alignment: Alignment.centerLeft,
                 child: SizedBox(
@@ -78,10 +75,12 @@ void login(){
                 ),
               ),
                   ],
-              ))
+              )
+              )
               ),
 
               SizedBox(height: 2),
+
               SizedBox(
                 width: 262,
                 height: 55,      
@@ -104,7 +103,6 @@ void login(){
                 ),
               ),
 
-            
              Align(
                 alignment: Alignment.centerLeft,
                 child: SizedBox(
@@ -122,9 +120,9 @@ void login(){
                   ))
               
               ),
+
               const SizedBox(height: 5),
 
-             
               SizedBox(
                 width: 262,
                 height: 55,
@@ -163,9 +161,8 @@ void login(){
                   ))
               
               ),
+
                 SizedBox(height: 25),
-                  
-                  
                   
                   SizedBox( 
                   width: 267,
@@ -265,20 +262,8 @@ void login(){
                 ),
               ),
 
-            
-
-         
-              
-              
               ),
 
-           
-                
-                // Padding(
-                //   padding: EdgeInsets.only(top: 70.0)),
-
-                
-               
                 Padding(
                     padding: EdgeInsetsGeometry.only(top: 50),
                     //alignment: Alignment(0, 5.0),
@@ -290,25 +275,10 @@ void login(){
                   Image.asset('assets/images/goggle.png', width: 50, height: 50),
                   ],
               ),
-                )
-              
-              
-          ],
-          
+                )    
+          ], 
         ),
-          
       ),
-       
-       
-    
-        
-
-
-
-
-
       );
-    
-    
   }
 }
