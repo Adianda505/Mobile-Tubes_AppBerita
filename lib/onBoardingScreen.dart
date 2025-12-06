@@ -43,7 +43,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               introPage1(),
               introPage2(),
               introPage3(),
-              Login(),// Index 3: Halaman yang ingin tampil independen
+              Regist(),// Index 3: Halaman yang ingin tampil independen
             ],
           ),
 
@@ -52,7 +52,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           if (currentPage <= 2) 
             Positioned(
               bottom: 180.0,
-          
               left: 0, 
               right: 0,
               child: Center(

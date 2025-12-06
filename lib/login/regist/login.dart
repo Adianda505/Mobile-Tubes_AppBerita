@@ -39,7 +39,7 @@ void login(){
             Text(
               'Use your email and Password to log in',
               style: TextStyle(
-                color: Colors.white,
+              color: Colors.white,
               ),
             ),
 
@@ -48,8 +48,8 @@ void login(){
             Form(
               child: Container(
                 width: 323,
-                //height : 306,
-                height: 386,
+                height : 306,
+              
                 decoration: BoxDecoration(
                   color: Colors.black,
                   borderRadius: BorderRadius.circular(15),
@@ -202,60 +202,9 @@ void login(){
 
                   SizedBox(height: 25),
 
-                  SizedBox( 
-                  width: 267,
-                  height: 40,
-                    
-                  child: ElevatedButton(
-                      // child: Ink(
-                      //   decoration: const BoxDecoration(
-                      //     gradient: LinearGradient(
-                      //       colors: [
-                      //         Color.fromARGB(255, 67, 18, 89),
-                      //         Color.fromARGB(255, 0, 0, 0)
-                      //       ]
-                      //       )
-                      //   ),
-                      // child: Container(
-                      //   constraints: const BoxConstraints(maxWidth: 267, minHeight: 40),
-                         
-                      // ),
-                      // ),
-                      // style: ElevatedButton(
-                      //    child
-                      //    ),
-                  onPressed: login, 
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 67, 18, 89)
-                  ),
-                  child: const Text('Sign Up',
-                         textAlign: TextAlign.center,
-                         style: TextStyle(
-                          color: Colors.white,
-                         ),
-                  ),  
-                  )
-                  ),
+                  
 
-                  SizedBox(height: 3),
-                Align(
-                alignment: Alignment.center,
-                child: SizedBox(
-                  width: 180,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const Text(
-                        'Dont have an account? Sign up',
-                          style: TextStyle(
-                            fontSize: 12,
-                          color: Colors.white,
-                ),
-              ),
-                    ],
-                  ))
-              
-              ),
+                 
                 ],
 
                 
@@ -271,7 +220,6 @@ void login(){
                   mainAxisAlignment: MainAxisAlignment.center,
                   
                   children: [
-                  Image.asset('assets/images/fesnuk.png', width: 50, height: 50),
                   Image.asset('assets/images/goggle.png', width: 50, height: 50),
                   ],
               ),
