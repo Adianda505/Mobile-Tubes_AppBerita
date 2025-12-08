@@ -19,9 +19,7 @@ class ReadingListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-      
         backgroundColor: Colors.black,
-        
         title: const Row(
           children: [
             Icon(Icons.arrow_back, color: Colors.white,),
