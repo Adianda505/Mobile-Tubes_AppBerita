@@ -1,146 +1,169 @@
-import 'package:field_area_proj_mobile/article/detail_article.dart';
-import 'package:field_area_proj_mobile/article/reading_list.dart';
+import 'package:field_area_proj_mobile/content_beranda.dart';
+import 'package:field_area_proj_mobile/home_content.dart';
+import 'package:field_area_proj_mobile/screen/article/reading_list.dart';
+import 'package:field_area_proj_mobile/screen/article/article_detail.dart';
+import 'package:field_area_proj_mobile/screen/article/reading_list.dart';
 import 'package:field_area_proj_mobile/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Beranda extends StatelessWidget {
-  const Beranda({super.key});
+ const Beranda({super.key});
+
+ @override
+ Widget build(BuildContext context) {
+  return MaterialApp(
+    debugShowCheckedModeBanner: false,
+    title: 'Field Area',
+    home: const BerandaPage(title: 'Beranda'),
+  );  
+ }
+}
+
+class _AppBarActionCircle extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  const _AppBarActionCircle({required this.icon, required this.color});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Field Area',
-        home: const BerandaPage(title: 'Beranda'),
-        
-    );    
+    return Container(
+      width: 45, 
+      height: 45, 
+      decoration: BoxDecoration(
+        color: color,
+        shape: BoxShape.circle,
+      ),
+      child: Icon(
+        icon,
+        color: Colors.white,
+        size: 28, 
+      ),
+    );
   }
 }
 
 class BerandaPage extends StatefulWidget { 
-  const BerandaPage({super.key, required this.title});
+ const BerandaPage({super.key, required this.title});
 
-  final String title;
+ final String title;
 
-  @override
-  State<BerandaPage> createState() => _BerandaPageState();
+ @override
+ State<BerandaPage> createState() => _BerandaPageState();
 }
 
+
 class _BerandaPageState extends State<BerandaPage>{
-   int _selectedIndex = 3;
+ int _selectedIndex = 3;
+ Widget _buildNavItem(IconData icon, String label, VoidCallback onTap, int index){
+  bool isSelected = index == _selectedIndex;
+  Color color = isSelected ? const Color.fromARGB(255, 255, 255, 255) : const Color.fromARGB(255, 255, 255, 255);
 
-  Widget _buildNavItem(IconData icon, String label,  VoidCallback onTap, int index){
-    bool isSelected = index == _selectedIndex;
-    Color color = isSelected ? const Color.fromARGB(255, 255, 255, 255) : const Color.fromARGB(255, 255, 255, 255);
-
-    return GestureDetector(
-          onTap: onTap,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Icon(icon, color: color, size: 26),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 10,
-              color: color,
-              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-            ),
-          ),
-        ],
+  return GestureDetector(
+   onTap: onTap,
+   child: Column(
+    mainAxisSize: MainAxisSize.min,
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+     Icon(icon, color: color, size: 26),
+     const SizedBox(height: 4),
+     Text(
+      label,
+      style: TextStyle(
+       fontSize: 10,
+       color: color,
+       fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
       ),
-    );
-  }
+     ),
+    ],
+   ),
+  );
+ }
 
+ @override
+ Widget build(BuildContext context) {
+  final user = FirebaseAuth.instance.currentUser;
+  return Scaffold(
+   bottomNavigationBar: Container(
+    decoration: BoxDecoration(
+     color: Color.fromARGB(255, 33, 1, 47),
+    ),
+    child: Padding(
+     padding: const EdgeInsets.only(bottom: 10.0),
+     child: Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+       Padding(
+        padding: const EdgeInsets.only(top: 5),
+        child: Row(
+         // mainAxisSize: MainAxisSize.max,
+         // mainAxisAlignment: MainAxisAlignment.spaceAround,
+         children: [
+          SizedBox(height: 5),
+       // Tombol Home (index 0)
+       _buildNavItem(Icons.home, "Home", () {
+        Navigator.pushReplacement(
+         context,
+         MaterialPageRoute(builder: (context) => const Beranda()),
+        );},0),
+       SizedBox(width: 100),
 
+       // reading list
+       _buildNavItem(Icons.bookmark, "Reading List", () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const ReadingList())); },1),
+       SizedBox(width: 100),
 
-  Widget build(BuildContext context) {
-    return Scaffold(
-
-       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: Color.fromARGB(255, 33, 1, 47),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 10.0),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: 5),
-                child: Row(
-                  // mainAxisSize: MainAxisSize.max,
-                  // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    SizedBox(height: 5),
-              // Tombol Home (index 0)
-              _buildNavItem(Icons.home, "Home", () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Beranda()),
-                );
-              }, 0),
-              SizedBox(width: 100),
-              // reading list
-              _buildNavItem(Icons.bookmark, "Reading List", () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ReadingList()));
-              }, 1),
-              SizedBox(width: 100),
-              //Profile
-              _buildNavItem(Icons.account_circle, "Profile", () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const Profile()));
-              }, 2),
-              SizedBox(width: 5),
-              ]
-              )
-              )
-            ],
-          ),
-        ),
-      ),
+       //Profile
+       _buildNavItem(Icons.account_circle, "Profile", () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen())); },2),
+       SizedBox(width: 5),
+       ]
+       )
+       )
+      ],
+     ),
+    ),
+   ),
+ 
+   //AppBar
+   appBar: AppBar(
+  toolbarHeight: 100.0,
+  backgroundColor: Colors.black,
   
-      appBar: AppBar(
-        toolbarHeight: 100.0,
-        backgroundColor: Colors.black,
-        title: const Row(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 24, top: 15),
-            child: Row(
-            children: [
-            Icon(Icons.account_circle, color: Colors.white, size: 50.0,),
-            SizedBox(width: 15),
-            Text('User',
-            style: TextStyle(
-              color: Colors.white
-            ),
-            ),
-            SizedBox(width: 120),
-            Icon(Icons.search, color: Colors.white, size: 50.0),
-            SizedBox(width: 5),
-            Icon(Icons.notification_add_rounded, color: Colors.white , size: 50.0,),
-            ]
-            ),
-            )
-          ],
-        ),
-      ) ,
-    
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          color: Colors.black
-        ),
-        child: Column(
-          children: [
-            
-          ],
+  // Widget 'title' akan berada di sebelah kiri
+  title: Row(
+    children: [
+      // 1. Avatar/Lingkaran Ungu Muda
+      const Padding(
+        padding: EdgeInsets.only(right: 8.0),
+      ),
+      // 2. Teks Sapaan
+      const Text(
+        'Field Area',
+        style: TextStyle(
+          fontSize: 24, // Ukuran font yang lebih besar
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
         ),
       ),
-    );
-  }
+    ],
+  ),
+  
+  // Widget 'actions' akan berada di sebelah kanan
+  actions: [
+    // Fungsi pembungkus untuk membuat lingkaran ungu
+    _AppBarActionCircle(
+      icon: Icons.search_outlined,
+      color: const Color(0xFF512DA8), // Warna ungu tua
+    ),
+    // Padding di antara icon
+    
+    // Padding di akhir (sebelah kanan)
+    const SizedBox(width: 16.0), 
+  ],
+),
+  body: HomeContent(),
+  );
+ }
 }

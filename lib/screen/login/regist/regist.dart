@@ -1,4 +1,4 @@
-import 'package:field_area_proj_mobile/login/regist/login.dart';
+import 'package:field_area_proj_mobile/screen/login/regist/login.dart';
 import 'package:flutter/material.dart';
 
 class Regist extends StatelessWidget {

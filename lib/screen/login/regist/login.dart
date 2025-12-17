@@ -1,12 +1,25 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:field_area_proj_mobile/provider/auth_provider.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
 
-
-void login(){
-
+  @override
+  State<Login> createState() => _loginState();
 }
+
+class _loginState extends State<Login>{
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _auth = FirebaseAuth.instance;
+
+  Future<void> _login() async{
+    try{
+      await _auth.signInWithEmailAndPassword(email: _emailController.text, password: _passwordController.text);
+    }on FirebaseAuthException catch (e){
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,25 +43,20 @@ void login(){
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'Welcome Back!',
-              style: TextStyle(
-                color: Colors.white
-              ),
+            Text( 'Welcome Back!',
+              style: TextStyle(color: Colors.white),
             ),
-            Text(
-              'Use your email and Password to log in',
-              style: TextStyle(
-              color: Colors.white,
-              ),
+            Text( 'Use your email and Password to log in',
+              style: TextStyle(color: Colors.white),
             ),
 
             SizedBox(height: 50),
             //Form Login
             Form(
+              
               child: Container(
                 width: 323,
-                height : 306,
+                height : 326,
               
                 decoration: BoxDecoration(
                   color: Colors.black,
@@ -59,7 +67,7 @@ void login(){
                   children: [
                   const SizedBox(height: 20),
 
-              SizedBox(height: 20),
+              SizedBox(height: 25),
 
               Align(
                 alignment: Alignment.centerLeft,
@@ -79,12 +87,16 @@ void login(){
               )
               ),
 
-              SizedBox(height: 2),
+              SizedBox(height: 1),
 
               SizedBox(
                 width: 262,
                 height: 55,      
                 child: TextField(
+                  controller: _emailController,
+                  style:TextStyle(
+                    color: Colors.white,
+                  ),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                      borderRadius: BorderRadius.circular(50.0)
@@ -122,11 +134,16 @@ void login(){
               ),
 
               const SizedBox(height: 5),
-
+              //password
               SizedBox(
                 width: 262,
                 height: 55,
                 child: TextField(
+                  controller: _passwordController,
+                  style: TextStyle(
+                    color: Colors.white
+                  ),
+                  obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                      borderRadius: BorderRadius.circular(50.0)
@@ -143,6 +160,7 @@ void login(){
                 ),
               ),
 
+              SizedBox(width: 10),
               Align(
                 alignment: Alignment.centerLeft,
                 child: SizedBox(
@@ -169,24 +187,7 @@ void login(){
                   height: 40,
                     
                   child: ElevatedButton(
-                      // child: Ink(
-                      //   decoration: const BoxDecoration(
-                      //     gradient: LinearGradient(
-                      //       colors: [
-                      //         Color.fromARGB(255, 67, 18, 89),
-                      //         Color.fromARGB(255, 0, 0, 0)
-                      //       ]
-                      //       )
-                      //   ),
-                      // child: Container(
-                      //   constraints: const BoxConstraints(maxWidth: 267, minHeight: 40),
-                         
-                      // ),
-                      // ),
-                      // style: ElevatedButton(
-                      //    child
-                      //    ),
-                  onPressed: login, 
+                  onPressed: _login, 
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 67, 18, 89)
                   ),
