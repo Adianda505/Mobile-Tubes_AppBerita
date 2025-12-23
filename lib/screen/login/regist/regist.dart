@@ -49,7 +49,7 @@ void login(){
       Form(
        child: Container(
         width: 323,
-        height: 356,
+        height: 300,
         decoration: BoxDecoration(
          color: Colors.black,
          borderRadius: BorderRadius.circular(15),
@@ -119,45 +119,6 @@ void login(){
        ),
        const SizedBox(height: 5),
 
-      
-       SizedBox(
-        width: 262,
-        height: 55,
-        child: TextField(
-         decoration: InputDecoration(
-          border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(50.0)
-          ),
-          enabledBorder: OutlineInputBorder(
-           borderRadius: BorderRadius.circular(50.0),
-           borderSide: const BorderSide(
-            color: Color.fromARGB(255, 67, 18, 89),
-           width: 2,
-           )
-          ),
-          filled: false,
-         ),
-        ),
-       ),
-
-       Align(
-        alignment: Alignment.centerLeft,
-        child: SizedBox(
-         width: 180,
-         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-           const Text(
-            'Confirm Password',
-             style: TextStyle(
-             color: Colors.white,
-        ),
-       ),
-         ],
-         ))
-       
-       ),
-       const SizedBox(height: 5),
       
        SizedBox(
         width: 262,
