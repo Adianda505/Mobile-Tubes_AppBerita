@@ -1,6 +1,4 @@
 import 'package:field_area_proj_mobile/firebase_options.dart';
-import 'package:field_area_proj_mobile/beranda.dart';
-import 'package:field_area_proj_mobile/onBoardingScreen.dart';
 import 'package:field_area_proj_mobile/screen/home_screen.dart';
 import 'package:field_area_proj_mobile/screen/login/regist/login.dart';
 import 'package:field_area_proj_mobile/screen/splash_screen/logo_intro.dart';

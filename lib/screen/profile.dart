@@ -1,6 +1,7 @@
+import 'package:field_area_proj_mobile/screen/login/regist/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart'; // Tambahkan ini
+import 'package:cloud_firestore/cloud_firestore.dart'; 
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -35,7 +36,8 @@ Future<void> _confirmLogout(BuildContext context) async {
                 Navigator.pop(context);
                 await FirebaseAuth.instance.signOut();
                 if (context.mounted){
-                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder : (context) => const Login()), (route) => false
+                  );
                 }
               },
               child: const Text("Logout"),
@@ -104,7 +106,6 @@ Future<void> _confirmLogout(BuildContext context) async {
               children: [
                 _buildProfileItem('Nama', data['name']),
                 _buildProfileItem('Email', data['email']),
-                _buildProfileItem('No HP', data['phone']),
               ],
             ),
           );

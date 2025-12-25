@@ -1,10 +1,9 @@
-import 'package:field_area_proj_mobile/profile.dart';
+import 'package:field_area_proj_mobile/screen/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:field_area_proj_mobile/api/api_service.dart';
 import '../widgets/news_card.dart';
 import '../data/model/article.dart';
 import 'article/reading_list.dart';
-import '../screen/profile_user.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

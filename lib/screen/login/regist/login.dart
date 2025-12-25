@@ -1,4 +1,3 @@
-import 'package:field_area_proj_mobile/beranda.dart';
 import 'package:field_area_proj_mobile/screen/home_screen.dart';
 import 'package:field_area_proj_mobile/screen/login/regist/regist.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -183,16 +182,16 @@ class _loginState extends State<Login>{
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      const Text(
-                        'Forgot Password?',
-                          style: TextStyle(
-                            fontSize: 12,
-                          color: Colors.white,
-                ),
-              ),
+                      //LUPA PASSWORD
+              //         const Text(
+              //           'Forgot Password?',
+              //             style: TextStyle(
+              //               fontSize: 12,
+              //             color: Colors.white,
+              //   ),
+              // ),
                     ],
                   ))
-              
               ),
 
                 SizedBox(height: 25),
@@ -210,14 +209,10 @@ class _loginState extends State<Login>{
                          textAlign: TextAlign.center,
                          style: TextStyle(
                           color: Colors.white,
-                         ),
-                  ),  
-                  )
-
-                  
-                  ),
-
-
+                      ),
+                   ),  
+                  )                  
+                ),
           
  SizedBox(height: 10),
       Align(
@@ -244,25 +239,19 @@ class _loginState extends State<Login>{
          ))
        
        ),
-                  
-
-                 
-                ],
-
                 
+                ]
                 ),
-              ),
-
-              ),
+            ),
+        ),
 
                 Padding(
                     padding: EdgeInsetsGeometry.only(top: 50),
                     //alignment: Alignment(0, 5.0),
                 child:  Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  
                   children: [
-                  Image.asset('assets/images/goggle.png', width: 50, height: 50),
+                //  Image.asset('assets/images/goggle.png', width: 50, height: 50),
                   ],
               ),
                 )    

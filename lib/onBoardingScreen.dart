@@ -2,8 +2,6 @@ import 'package:field_area_proj_mobile/screen/splash_screen/intro1.dart';
 import 'package:field_area_proj_mobile/screen/splash_screen/intro2.dart';
 import 'package:field_area_proj_mobile/screen/splash_screen/intro3.dart';
 import 'package:field_area_proj_mobile/screen/login/regist/login.dart';
-import 'package:field_area_proj_mobile/screen/login/regist/regist.dart';
-import 'package:field_area_proj_mobile/screen/splash_screen/logo_intro.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

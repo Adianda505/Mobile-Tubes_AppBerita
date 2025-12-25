@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// Pastikan kedua import di bawah ini mengarah ke file yang benar
 import '../../widgets/news_card.dart';
-import '../../data/model/article.dart'; // Tambahkan ini jika NewsCard butuh referensi tipe data
+import '../../data/model/article.dart'; 
 import '../../provider/bookmark_provider.dart';
 
 class ReadingList extends StatelessWidget {
