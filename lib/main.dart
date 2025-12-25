@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,  
-      home: intro_logo(),
+      home: const intro_logo(),
     );
   }
 }
@@ -53,7 +53,7 @@ class AuthWrapper extends StatelessWidget {
         return const Center(child: CircularProgressIndicator());
        } 
        if (snapshot.hasData){
-        return const BerandaPage(title: 'Beranda');
+        return const HomeScreen();
        }
        return const Login();
       }

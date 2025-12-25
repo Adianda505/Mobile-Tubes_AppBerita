@@ -4,6 +4,7 @@ import 'package:field_area_proj_mobile/screen/article/reading_list.dart';
 import 'package:field_area_proj_mobile/screen/article/article_detail.dart';
 import 'package:field_area_proj_mobile/screen/article/reading_list.dart';
 import 'package:field_area_proj_mobile/profile.dart';
+import 'package:field_area_proj_mobile/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -163,7 +164,7 @@ class _BerandaPageState extends State<BerandaPage>{
     const SizedBox(width: 16.0), 
   ],
 ),
-  body: HomeContent(),
+  body: HomeScreen(),
   );
  }
 }

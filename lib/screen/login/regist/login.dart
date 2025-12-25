@@ -1,3 +1,6 @@
+import 'package:field_area_proj_mobile/beranda.dart';
+import 'package:field_area_proj_mobile/screen/home_screen.dart';
+import 'package:field_area_proj_mobile/screen/login/regist/regist.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:field_area_proj_mobile/provider/auth_provider.dart';
@@ -14,10 +17,22 @@ class _loginState extends State<Login>{
   final _passwordController = TextEditingController();
   final _auth = FirebaseAuth.instance;
 
-  Future<void> _login() async{
-    try{
-      await _auth.signInWithEmailAndPassword(email: _emailController.text, password: _passwordController.text);
-    }on FirebaseAuthException catch (e){
+ Future<void> _login() async {
+    try {
+      await _auth.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+      if (mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+      );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.toString())),
+      );
     }
   }
 
@@ -198,11 +213,37 @@ class _loginState extends State<Login>{
                          ),
                   ),  
                   )
+
+                  
                   ),
 
 
-                  SizedBox(height: 25),
-
+          
+ SizedBox(height: 10),
+      Align(
+        alignment: Alignment(0, 10.0),
+        child: SizedBox(
+         width: 290,
+        
+         child: GestureDetector(
+          onTap: (){
+           Navigator.push(context, MaterialPageRoute(builder: (context) => Regist()));
+          },
+          child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+           const Text(
+            'Dont have an accout?',
+             style: TextStyle(
+              fontSize: 12,
+             color: Colors.white,
+        ),
+       ),
+          ],
+          ),
+         ))
+       
+       ),
                   
 
                  

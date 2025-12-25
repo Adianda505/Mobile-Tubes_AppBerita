@@ -44,7 +44,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               introPage1(),
               introPage2(),
               introPage3(),
-              Regist(),// Index 3: Halaman yang ingin tampil independen
+              Login(),// Index 3: Halaman yang ingin tampil independen
             ],
           ),
 
