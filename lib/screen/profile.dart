@@ -1,12 +1,12 @@
 import 'package:field_area_proj_mobile/screen/login/regist/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart'; 
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
-Future<void> _confirmLogout(BuildContext context) async {
+  Future<void> _confirmLogout(BuildContext context) async {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -35,9 +35,11 @@ Future<void> _confirmLogout(BuildContext context) async {
               onPressed: () async {
                 Navigator.pop(context);
                 await FirebaseAuth.instance.signOut();
-                if (context.mounted){
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder : (context) => const Login()), (route) => false
-                  );
+                if (context.mounted) {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Login()),
+                      (route) => false);
                 }
               },
               child: const Text("Logout"),
@@ -48,20 +50,38 @@ Future<void> _confirmLogout(BuildContext context) async {
     );
   }
 
-  Future<Map<String, dynamic>?> _getUserData() async {
+  // Fungsi untuk mengambil data Profile (Prioritas: Firebase Auth -> Firestore)
+  Future<Map<String, dynamic>> _getProfileData() async {
     final user = FirebaseAuth.instance.currentUser;
-    if (user == null) return null;
+    
+    // Default data dari Firebase Auth (Google Account)
+    Map<String, dynamic> userData = {
+      'name': user?.displayName ?? "Pengguna",
+      'email': user?.email ?? "Email tidak tersedia",
+      'photoUrl': user?.photoURL, // Bonus: bisa ambil foto profil Google
+    };
 
-    // Mengambil data dari koleksi 'users' berdasarkan UID login
-    final doc = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(user.uid)
-        .get();
+    try {
+      // Mencoba mengambil data tambahan dari Firestore jika ada
+      if (user != null) {
+        final doc = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .get();
 
-    return doc.data();
+        if (doc.exists && doc.data() != null) {
+          final data = doc.data()!;
+          // Jika di Firestore ada nama, kita bisa gunakan itu atau tetap pakai Google
+          if (data['name'] != null) userData['name'] = data['name'];
+        }
+      }
+    } catch (e) {
+      debugPrint("Error fetching Firestore: $e");
+    }
+
+    return userData;
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,32 +98,37 @@ Future<void> _confirmLogout(BuildContext context) async {
           ),
         ],
       ),
-      body: FutureBuilder<Map<String, dynamic>?>(
-        future: _getUserData(),
+      body: FutureBuilder<Map<String, dynamic>>(
+        future: _getProfileData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          // Jika user baru daftar dan datanya belum ada di Firestore
-          if (!snapshot.hasData || snapshot.data == null) {
-            final user = FirebaseAuth.instance.currentUser;
-            return Center(
-              child: Text(
-                'Email: ${user?.email}\n(Data tambahan belum diisi)',
-                style: const TextStyle(color: Colors.white),
-                textAlign: TextAlign.center,
-              ),
-            );
+            return const Center(child: CircularProgressIndicator(color: Colors.white));
           }
 
           final data = snapshot.data!;
 
-          return Container(
+          return SingleChildScrollView(
             padding: const EdgeInsets.all(20),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Menampilkan Foto Profil Google jika ada
+                if (data['photoUrl'] != null)
+                  Center(
+                    child: CircleAvatar(
+                      radius: 50,
+                      backgroundImage: NetworkImage(data['photoUrl']),
+                    ),
+                  )
+                else
+                  const Center(
+                    child: CircleAvatar(
+                      radius: 50,
+                      child: Icon(Icons.person, size: 50),
+                    ),
+                  ),
+                
+                const SizedBox(height: 30),
+
                 _buildProfileItem('Nama', data['name']),
                 _buildProfileItem('Email', data['email']),
               ],
@@ -114,7 +139,6 @@ Future<void> _confirmLogout(BuildContext context) async {
     );
   }
 
-  // Helper widget agar kode lebih rapi
   Widget _buildProfileItem(String label, String? value) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
@@ -122,13 +146,15 @@ Future<void> _confirmLogout(BuildContext context) async {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(label, style: const TextStyle(color: Colors.grey, fontSize: 14)),
-          Text(value ?? '-', style: const TextStyle(color: Colors.white, fontSize: 18)),
+          const SizedBox(height: 5),
+          Text(value ?? '-',
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500)),
           const Divider(color: Colors.white24),
-        
         ],
       ),
     );
-
-    
   }
 }
